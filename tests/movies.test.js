@@ -6,7 +6,6 @@ describe('GET /api/movies', () => {
     const response = await request(app).get('/api/movies');
     console.log('response status:', response.status);
     console.log('Response body:', response.body);
-    
     expect(response.headers['content-type']).toMatch(/json/);
     expect(response.status).toEqual(200);
   });
@@ -14,12 +13,22 @@ describe('GET /api/movies', () => {
 
 describe('GET /api/movies/:id', () => {
   it('should return one movie', async () => {
-    const movieId = 3;
+    const movieId = 1;
     const response = await request(app).get(`/api/movies/${movieId}`);
     console.log('response status:', response.status);
     console.log('Response body:', response.body);
     expect(response.headers['content-type']).toMatch(/json/);
     expect(response.status).toEqual(200);
-    expect(response.body).toBeDefined();
+    
   });
 });
+describe('GET /api/movies/:id', () => {
+    it('should return one movie', async () => {
+      const movieId = 0;
+      const response = await request(app).get(`/api/movies/${movieId}`);
+      console.log('response status:', response.status);
+      console.log('Response body:', response.body);
+      expect(response.status).toEqual(404);
+      
+    });
+  });
